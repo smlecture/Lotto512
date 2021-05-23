@@ -16,9 +16,18 @@ class ResultActivity : AppCompatActivity() {
         val result = intent.getIntegerArrayListExtra("result") // ?: return
 
         // 2) sort the array
-        val result_sorted = result?.let { result.sortedBy{it} }
+//        val result_sorted = result?.let { result.sortedBy{it} }
+        result?.let{
+            updateLottoBallImages(result.sortedBy{it})
+        }
 
         // 3) set images
+
+
+    }
+
+//    private fun updateLottoBallImages(result_sorted : ArrayList<Int>) {
+    private fun updateLottoBallImages(result_sorted : List<Int>) {
         val lottoImageStartId = R.drawable.ball_01
 
         val imageView1 = findViewById<ImageView>(R.id.imageView1)
@@ -34,16 +43,5 @@ class ResultActivity : AppCompatActivity() {
         imageView4.setImageResource(lottoImageStartId + result_sorted?.get(3) - 1)
         imageView5.setImageResource(lottoImageStartId + result_sorted?.get(4) - 1)
         imageView6.setImageResource(lottoImageStartId + result_sorted?.get(5) - 1)
-
     }
-
- /*   private fun updateLottoBallImages(result : List<Int>) {
-        imageView1.setImageResource(lottoImageStartId + (result[0] - 1))
-        imageView2.setImageResource(lottoImageStartId + (result[1] - 1))
-        imageView3.setImageResource(lottoImageStartId + (result[2] - 1))
-        imageView4.setImageResource(lottoImageStartId + (result[3] - 1))
-        imageView5.setImageResource(lottoImageStartId + (result[4] - 1))
-        imageView6.setImageResource(lottoImageStartId + (result[5] - 1))
-
-    }*/
 }
