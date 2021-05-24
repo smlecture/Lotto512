@@ -16,11 +16,52 @@ fun getRandomLottoNumbers(): MutableList<Int>{
     //for(i in 1..6){
         var number = 0
         do{
-            number = getRandomLottoNumber()
+           number = getRandomLottoNumber()
         }while(lottoNumbers.contains(number))
         lottoNumbers.add(number)
     }
+/*    while(true){
+        var number: Int = getRandomLottoNumber()
+        var existing: Int = 0
+        for(j in 0..lottoNumbers.size){
+            if(number.equals(lottoNumbers[j])) {
+                existing = 1
+                break;
+            }
+        }
+        if (existing.equals(1))
+            continue
+        else
+            lottoNumbers.add(number)
+        if(lottoNumbers.size >= 6)
+            break;
+    }*/
+/*    while(true){
+        var number: Int = getRandomLottoNumber()
+        var existing: Int = 0
+        if(lottoNumbers.contains(number)) {
+                existing = 1
+                break;
+        }
+        if (existing.equals(1))
+            continue
+        else
+            lottoNumbers.add(number)
+        if(lottoNumbers.size >= 6)
+            break;
+    }*/
     return lottoNumbers
+}
+
+fun getShuffledLottoNumbers () : MutableList<Int>{
+    val list = mutableListOf<Int>()
+
+    for(number in 1..45){
+        list.add(number)
+    }
+    list.shuffle()
+
+    return list.subList(0, 6)
 }
 
 
@@ -32,7 +73,9 @@ class MainActivity : AppCompatActivity() {
         val cardRandom = findViewById<CardView>(R.id.cardRandom)
         cardRandom.setOnClickListener {
             val intent = Intent(this, ResultActivity::class.java)
-            intent.putIntegerArrayListExtra("result", ArrayList(getRandomLottoNumbers()))
+            val shuffledNumbers = getShuffledLottoNumbers ()
+//            intent.putIntegerArrayListExtra("result", ArrayList(getRandomLottoNumbers()))
+            intent.putIntegerArrayListExtra("result", ArrayList(shuffledNumbers))
             startActivity(intent)
         }
         val cardConstell = findViewById<CardView>(R.id.cardConstell)
