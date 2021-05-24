@@ -32,15 +32,16 @@ class ConstellationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_constellation)
 
-//        val btnGoResult = findViewById<Button>(R.id.btnGoResult)
-        val btnGoResult = findViewById<Button>(R.id.btnGo)
-        val datePicker = findViewById<DatePicker>(R.id.datePicker)
-        val textHoroscope = findViewById<TextView>(R.id.txtHoroscope)
-        textHoroscope.text = makeHoroscopeString(datePicker.month, datePicker.dayOfMonth)
+        val btnGoResultConstell = findViewById<Button>(R.id.btnGoResultConstell)
+//        val btnGoResult = findViewById<Button>(R.id.btnGo)
 
-        btnGoResult.setOnClickListener {
+//        val datePicker = findViewById<DatePicker>(R.id.datePicker)
+//        val textHoroscope = findViewById<TextView>(R.id.txtHoroscope)
+//        textHoroscope.text = makeHoroscopeString(datePicker.month, datePicker.dayOfMonth)
+
+        btnGoResultConstell.setOnClickListener {
             val intent = Intent(this, ResultActivity::class.java)
-            intent.putIntegerArrayListExtra("result", ArrayList(getLottoNumbersFromHash(textHoroscope.text.toString())))
+//            intent.putIntegerArrayListExtra("result", ArrayList(getLottoNumbersFromHash(textHoroscope.text.toString())))
             startActivity(Intent(this, ResultActivity::class.java))
         }
 

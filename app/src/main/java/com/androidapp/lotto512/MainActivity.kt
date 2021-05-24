@@ -12,48 +12,60 @@ fun getRandomLottoNumber (): Int{
 fun getRandomLottoNumbers(): MutableList<Int>{
     val lottoNumbers = mutableListOf<Int>()
 
-    (1..6).forEach {
-    //for(i in 1..6){
-        var number = 0
+//    (1..6).forEach {
+/*    for(i in 1..6){
+*//*        var number = 0
         do{
            number = getRandomLottoNumber()
         }while(lottoNumbers.contains(number))
-        lottoNumbers.add(number)
-    }
+        lottoNumbers.add(number)*//*
+        lottoNumbers.add(getRandomLottoNumber(1))
+    }*/
+    // 1. From scratch
 /*    while(true){
         var number: Int = getRandomLottoNumber()
-        var existing: Int = 0
+        var flagExisting: Int = 0
         for(j in 0..lottoNumbers.size){
             if(number.equals(lottoNumbers[j])) {
-                existing = 1
+                flagExisting = 1
                 break;
             }
         }
-        if (existing.equals(1))
+        if (flagExisting.equals(1))
             continue
         else
             lottoNumbers.add(number)
         if(lottoNumbers.size >= 6)
             break;
     }*/
-/*    while(true){
+    // 2. Using "contains()"
+ /*   while(true){
         var number: Int = getRandomLottoNumber()
-        var existing: Int = 0
+        var flagExisting: Int = 0
         if(lottoNumbers.contains(number)) {
-                existing = 1
+            flagExisting = 1
                 break;
         }
-        if (existing.equals(1))
+        if (flagExisting.equals(1))
             continue
         else
             lottoNumbers.add(number)
         if(lottoNumbers.size >= 6)
             break;
     }*/
+    // 3.
+    for(i in 1..6){
+        var number = 0
+        do{
+            number = getRandomLottoNumber()
+        }while(lottoNumbers.contains(number))
+        lottoNumbers.add(number)
+    }
+
     return lottoNumbers
 }
 
-fun getShuffledLottoNumbers () : MutableList<Int>{
+/*fun getShuffledLottoNumbers () : MutableList<Int>{
     val list = mutableListOf<Int>()
 
     for(number in 1..45){
@@ -62,7 +74,7 @@ fun getShuffledLottoNumbers () : MutableList<Int>{
     list.shuffle()
 
     return list.subList(0, 6)
-}
+}*/
 
 
 class MainActivity : AppCompatActivity() {
@@ -73,9 +85,9 @@ class MainActivity : AppCompatActivity() {
         val cardRandom = findViewById<CardView>(R.id.cardRandom)
         cardRandom.setOnClickListener {
             val intent = Intent(this, ResultActivity::class.java)
-            val shuffledNumbers = getShuffledLottoNumbers ()
-//            intent.putIntegerArrayListExtra("result", ArrayList(getRandomLottoNumbers()))
-            intent.putIntegerArrayListExtra("result", ArrayList(shuffledNumbers))
+//            val shuffledNumbers = getShuffledLottoNumbers ()
+            intent.putIntegerArrayListExtra("result", ArrayList(getRandomLottoNumbers()))
+//            intent.putIntegerArrayListExtra("result", ArrayList(shuffledNumbers))
             startActivity(intent)
         }
         val cardConstell = findViewById<CardView>(R.id.cardConstell)
