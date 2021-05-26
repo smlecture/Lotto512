@@ -40,8 +40,6 @@ class ResultActivity : AppCompatActivity() {
         imageView4.setImageResource(lottoBallImageStartId + result_sorted[3] - 1)
         imageView5.setImageResource(lottoBallImageStartId + result_sorted[4] - 1)
         imageView6.setImageResource(lottoBallImageStartId + result_sorted[5] - 1)*/
-
-
     }
 
 //    private fun updateLottoBallImages(result_sorted : ArrayList<Int>) {
