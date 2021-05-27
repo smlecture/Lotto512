@@ -9,7 +9,7 @@ import java.util.*
 fun getRandomLottoNumber (): Int{
     return Random().nextInt(45)+1
 }
-fun getRandomLottoNumbers(): MutableList<Int>{
+/*fun getRandomLottoNumbers(): MutableList<Int>{
     val lottoNumbers = mutableListOf<Int>()
 
     while(true){
@@ -34,17 +34,31 @@ fun getRandomLottoNumbers(): MutableList<Int>{
         }
     }
     return lottoNumbers
+}*/
+fun getRandomLottoNumbers(): MutableList<Int>{
+    val lottoNumbers = mutableListOf<Int>()
+
+    for(i in 1..6){
+        var number = 0
+        do{
+            number = getRandomLottoNumber()
+        }while(lottoNumbers.contains(number))
+        lottoNumbers.add(number)
+    }
+    return lottoNumbers
 }
+
 fun getShuffledLottoNumbers () : MutableList<Int>{
-    val list = mutableListOf<Int>()
+    val lottoNumbers = mutableListOf<Int>()
 
     for(number in 1..45){
-        list.add(number)
+        lottoNumbers.add(number)
     }
-    list.shuffle()
+    lottoNumbers.shuffle()
 
-    return list.subList(0, 6)
+    return lottoNumbers.subList(0, 6)
 }
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
