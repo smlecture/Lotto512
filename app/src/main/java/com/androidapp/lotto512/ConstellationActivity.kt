@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-fun getLottoNumbersFromHash(str: String): MutableList<Int>{
+/*fun getLottoNumbersFromHash(str: String): MutableList<Int>{
     // 정수 list todtjd
     val list = mutableListOf<Int>()
     // list에 정수 저장
@@ -24,7 +24,7 @@ fun getLottoNumbersFromHash(str: String): MutableList<Int>{
     list.shuffle(Random(targetString.hashCode().toLong())) // 같은 seed 사용하면 항상 같은 sequence
     // 앞에서부터 6개 반환
     return list.subList(0, 6)
-}
+}*/
 
 
 class ConstellationActivity : AppCompatActivity() {
