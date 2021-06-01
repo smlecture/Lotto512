@@ -35,14 +35,16 @@ class ConstellationActivity : AppCompatActivity() {
         val btnGoResultConstell = findViewById<Button>(R.id.btnGoResultConstell)
 //        val btnGoResult = findViewById<Button>(R.id.btnGo)
 
-//        val datePicker = findViewById<DatePicker>(R.id.datePicker)
-//        val textHoroscope = findViewById<TextView>(R.id.txtHoroscope)
-//        textHoroscope.text = makeHoroscopeString(datePicker.month, datePicker.dayOfMonth)
+        val datePicker = findViewById<DatePicker>(R.id.datePicker)
+        val txtConstell = findViewById<TextView>(R.id.txtConstell)
+//        txtConstell.text = makeHoroscopeString(datePicker.month, datePicker.dayOfMonth)
 
         btnGoResultConstell.setOnClickListener {
             val intent = Intent(this, ResultActivity::class.java)
-//            intent.putIntegerArrayListExtra("result", ArrayList(getLottoNumbersFromHash(textHoroscope.text.toString())))
-            startActivity(Intent(this, ResultActivity::class.java))
+            intent.putIntegerArrayListExtra("result", ArrayList(getLottoNumbersFromHash(txtConstell.text.toString())))
+            intent.putExtra("constellation",makeConstellationString(datePicker.month, datePicker.dayOfMonth))
+//            startActivity(Intent(this, ResultActivity::class.java))
+            startActivity(intent)
         }
 
 
@@ -64,7 +66,7 @@ class ConstellationActivity : AppCompatActivity() {
                 )*/
     }
 
-    private fun makeHoroscopeString(month: Int, dayOfMonth: Int): String {
+    private fun makeConstellationString(month: Int, dayOfMonth: Int): String {
 //        val target = "${month}${String.format("%02d",dayOfMonth)}".toInt()
         val target = "${month + 1}${String.format("%02d",dayOfMonth)}".toInt()
 
