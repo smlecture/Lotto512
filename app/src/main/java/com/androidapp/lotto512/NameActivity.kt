@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import java.text.SimpleDateFormat
 import java.util.*
 
 fun getShuffledLottoNumbersFromHash(str: String): MutableList<Int>{
@@ -15,6 +16,8 @@ fun getShuffledLottoNumbersFromHash(str: String): MutableList<Int>{
     }
     // list 섞기. SEED 값으로 이름의 hash 코드 사용
     list.shuffle(Random(str.hashCode().toLong())) // → 사람마다 다른 번호 추천
+/*    val targetString = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SS", Locale.KOREA).format(Date()) + str
+    list.shuffle(Random(targetString.hashCode().toLong()))*/
     // 앞에서부터 6개 반환
     return list.subList(0, 6)
 }

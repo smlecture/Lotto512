@@ -10,23 +10,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-/*fun getLottoNumbersFromHash(str: String): MutableList<Int>{
-    // 정수 list todtjd
-    val list = mutableListOf<Int>()
-    // list에 정수 저장
-    for (number in 1..45){
-        list.add(number)
-    }
-
-    val targetString = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SS", Locale.KOREA).format(Date()) + str
-
-    // list 섞기. SEED 값으로 이름의 hash 코드 사용
-    list.shuffle(Random(targetString.hashCode().toLong())) // 같은 seed 사용하면 항상 같은 sequence
-    // 앞에서부터 6개 반환
-    return list.subList(0, 6)
-}*/
-
-
 class ConstellationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,18 +17,18 @@ class ConstellationActivity : AppCompatActivity() {
 
 //        val btnGoResult = findViewById<Button>(R.id.btnGoResult)
         val btnGoResultConstell = findViewById<Button>(R.id.btnGoResultConstell)
-/*        val datePicker = findViewById<DatePicker>(R.id.datePicker)
+        val datePicker = findViewById<DatePicker>(R.id.datePicker)
         val txtConstell = findViewById<TextView>(R.id.txtConstell)
-        txtConstell.text = makeHoroscopeString(datePicker.month, datePicker.dayOfMonth)*/
+        txtConstell.text = makeConstellationString(datePicker.month, datePicker.dayOfMonth)
 
         btnGoResultConstell.setOnClickListener {
-/*            val intent = Intent(this, ResultActivity::class.java)
-            intent.putIntegerArrayListExtra("result", ArrayList(getLottoNumbersFromHash(txtConstell.text.toString())))
-            startActivity(Intent(this, ResultActivity::class.java))*/
-            startActivity(Intent(this, ResultActivity::class.java))
+            val intent = Intent(this, ResultActivity::class.java)
+            intent.putIntegerArrayListExtra("result",
+                    ArrayList(getShuffledLottoNumbersFromHash(txtConstell.text.toString())))
+            intent.putExtra("constellation", makeConstellationString(datePicker.month, datePicker.dayOfMonth))
+            startActivity(intent)
+//            startActivity(Intent(this, ResultActivity::class.java))
         }
-
-
 
 //        val calendar = Calendar.getInstance()
 
@@ -63,13 +46,28 @@ class ConstellationActivity : AppCompatActivity() {
             }
                 )*/
     }
+    fun getShuffledLottoNumbersFromHash(str: String): MutableList<Int>{
+        // 정수 list todtjd
+        val list = mutableListOf<Int>()
+        // list에 정수 저장
+        for (number in 1..45){
+            list.add(number)
+        }
 
-    private fun makeHoroscopeString(month: Int, dayOfMonth: Int): String {
+        val targetString = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.KOREA).format(Date()) + str
+
+        // list 섞기. SEED 값으로 이름의 hash 코드 사용
+        list.shuffle(Random(targetString.hashCode().toLong())) // 같은 seed 사용하면 항상 같은 sequence
+        // 앞에서부터 6개 반환
+        return list.subList(0, 6)
+    }
+
+    private fun makeConstellationString(month: Int, dayOfMonth: Int): String {
 //        val target = "${month}${String.format("%02d",dayOfMonth)}".toInt()
-        val target = "${month + 1}${String.format("%02d",dayOfMonth)}".toInt()
+        val target = "${month+1}${String.format("%02d",dayOfMonth)}".toInt()
 
         when (target){
-            in 101..119 -> return "염소자리"
+            in 101..119 -> return "염소자리" // 101
             in 120..218 -> return "물병자리"
             in 219..320 -> return "물고기자리"
             in 321..419 -> return "양자리"
