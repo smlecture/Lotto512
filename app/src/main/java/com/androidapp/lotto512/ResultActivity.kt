@@ -2,6 +2,7 @@ package com.androidapp.lotto512
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.DatePicker
 import android.widget.ImageView
 import android.widget.TextView
 import java.text.SimpleDateFormat
@@ -18,6 +19,7 @@ class ResultActivity : AppCompatActivity() {
         // 1) get result
         val result = intent.getIntegerArrayListExtra("result") ?: return // ?: return
         val sConstellation = intent.getStringExtra("constellation")
+        val datePicker = findViewById<DatePicker>(R.id.datePicker)
         //        // 2) sort the array
 //        result?.sort() // in-place
 //        val result_sorted = result?.sortedBy{it}
@@ -26,10 +28,12 @@ class ResultActivity : AppCompatActivity() {
 /*        result?.let{
             updateLottoBallImages(result.sortedBy{it})
         }*/
+        val resultLabel = findViewById<TextView>(R.id.resultLabel)
         sConstellation?.let {
-            val resultLabel = findViewById<TextView>(R.id.resultLabel)
-            resultLabel.text = "${sConstellation}의 ${SimpleDateFormat("yyyy년 MM월 dd일")
-                .format(Date())} 로또 번호입니다"
+//            val resultLabel = findViewById<TextView>(R.id.resultLabel)
+/*            resultLabel.text = "${sConstellation}의 ${SimpleDateFormat("yyyy년 MM월 dd일")
+                .format(Date())} 로또 번호입니다"*/
+            resultLabel.text = "${sConstellation}의 ${datePicker.month}월 ${datePicker.dayOfMonth}일의 로또 번호입니다"
         }
         // 3) set images
         val imageView1 = findViewById<ImageView>(R.id.imageView1)

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CalendarView
 import android.widget.DatePicker
 import android.widget.TextView
 import java.text.SimpleDateFormat
@@ -30,21 +31,29 @@ class ConstellationActivity : AppCompatActivity() {
 //            startActivity(Intent(this, ResultActivity::class.java))
         }
 
-//        val calendar = Calendar.getInstance()
+        val calendar = Calendar.getInstance()
 
-
-/*        datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
+   /*     datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
             object : CalendarView.OnDateChangeListener, DatePicker.OnDateChangedListener {
                 override fun onSelectedDayChange(view: CalendarView, year: Int, month: Int, dayOfMonth: Int) {
-                    textHoroscope.text = makeHoroscopeString(datePicker.month, datePicker.dayOfMonth)
+
                 }
 
                 override fun onDateChanged(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
-                    TODO("Not yet implemented")
+                    txtConstell.text = makeConstellationString(datePicker.month, datePicker.dayOfMonth)
                 }
-
             }
                 )*/
+             datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
+                object : CalendarView.OnDateChangeListener, DatePicker.OnDateChangedListener {
+                    override fun onSelectedDayChange(view: CalendarView, year: Int, month: Int, dayOfMonth: Int
+                    ) { }
+                    override fun onDateChanged(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int
+                    ) {
+                        txtConstell.text = makeConstellationString(datePicker.month, datePicker.dayOfMonth)
+                    }
+                }
+             )
     }
     fun getShuffledLottoNumbersFromHash(str: String): MutableList<Int>{
         // 정수 list todtjd
@@ -54,7 +63,8 @@ class ConstellationActivity : AppCompatActivity() {
             list.add(number)
         }
 
-        val targetString = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.KOREA).format(Date()) + str
+//        val targetString = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.KOREA).format(Date()) + str
+        val targetString = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).format(Date()) + str
 
         // list 섞기. SEED 값으로 이름의 hash 코드 사용
         list.shuffle(Random(targetString.hashCode().toLong())) // 같은 seed 사용하면 항상 같은 sequence
